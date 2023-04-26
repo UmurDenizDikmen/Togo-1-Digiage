@@ -657,10 +657,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otomatAvaliblePos: 010000000200000003000000040000000500000006000000070000000800000009000000
   removeNumbers: 
-  carringObjects:
+  carringObjects: []
+  carriableObjects:
+  - {fileID: 2100966079974023974, guid: 5f03bce7969b6eb4191963248a4d1d2b, type: 3}
   - {fileID: 6174410183395098683, guid: 6e0e8427eac35f04a8b2fdbb3225fa58, type: 3}
   - {fileID: 6196327573429336862, guid: 682be2be2ac3ae14cb7a9d389cf8005c, type: 3}
-  - {fileID: 2100966079974023974, guid: 5f03bce7969b6eb4191963248a4d1d2b, type: 3}
   currentOtomatPos: 0
   currentPosNumberText: {fileID: 1816339705}
 --- !u!4 &555987872
