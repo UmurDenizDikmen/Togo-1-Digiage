@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
         {
             carringObjects.Add(carriableObjects[0].gameObject);
         }
+
+
+
     }
 
 }

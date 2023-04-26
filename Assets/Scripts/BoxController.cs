@@ -7,7 +7,7 @@ public class BoxController : MonoBehaviour
 {
     GameManager _gameManager;
     private int maxCapacity = 3;
-    private GameObject objects;
+    private  GameObject objects;
     public static bool isSelected = false;
     private void Start()
     {
@@ -17,6 +17,7 @@ public class BoxController : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        //if(_gameManager.carringObjects.Count < 1) return;
         int randomObjects = Random.Range(0,_gameManager.carringObjects.Count - 1);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -39,7 +40,7 @@ public class BoxController : MonoBehaviour
 
             objects.transform.SetParent(transform);
             objects.transform.DOScale(new Vector3(0.2f, 0.2f, 0.2f), 0.01f);
-            _gameManager.carringObjects.Remove(objects);
+            //_gameManager.carringObjects.Remove(objects);
 
         }
     }

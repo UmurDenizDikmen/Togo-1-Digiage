@@ -58,6 +58,7 @@ public class DraggableItem : MonoBehaviour
             var hitNumber = int.Parse(hit.transform.GetChild(0).GetComponent<TextMeshPro>().text);
             if (hitNumber == gameManager.currentOtomatPos)
             {
+
                 BoxController.isSelected = false;
                 var transformRaf = hit.transform.GetChild(1);
                 transform.SetParent(transformRaf);
@@ -66,7 +67,9 @@ public class DraggableItem : MonoBehaviour
                 gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık  //burda kmerata hareketini kontrol edicez.
                 gameManager.removeNumbers.Add(gameManager.currentOtomatPos); // diğer lsiteye ekledik.
                 gameManager.currentPosNumberText.text = string.Empty;
-                gameManager.carringObjects.Remove(transform.gameObject);
+                //gameManager.carringObjects.Remove(transform.gameObject);
+                gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count-1);
+
 
             }
         }
