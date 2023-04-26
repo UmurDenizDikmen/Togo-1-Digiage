@@ -63,9 +63,10 @@ public class DraggableItem : MonoBehaviour
                 transform.SetParent(transformRaf);
                 transform.position = transformRaf.position;
                 isInPlace = true;
-                gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık
+                gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık  //burda kmerata hareketini kontrol edicez.
                 gameManager.removeNumbers.Add(gameManager.currentOtomatPos); // diğer lsiteye ekledik.
                 gameManager.currentPosNumberText.text = string.Empty;
+                gameManager.carringObjects.Remove(transform.gameObject);
             }
         }
         if (isInPlace == false)
