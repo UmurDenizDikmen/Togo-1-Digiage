@@ -58,7 +58,7 @@ public class DraggableItem : MonoBehaviour
             var hitNumber = int.Parse(hit.transform.GetChild(0).GetComponent<TextMeshPro>().text);
             if (hitNumber == gameManager.currentOtomatPos)
             {
-
+                BoxController.isSelected = false;
                 var transformRaf = hit.transform.GetChild(1);
                 transform.SetParent(transformRaf);
                 transform.position = transformRaf.position;
@@ -67,6 +67,7 @@ public class DraggableItem : MonoBehaviour
                 gameManager.removeNumbers.Add(gameManager.currentOtomatPos); // diğer lsiteye ekledik.
                 gameManager.currentPosNumberText.text = string.Empty;
                 gameManager.carringObjects.Remove(transform.gameObject);
+
             }
         }
         if (isInPlace == false)
