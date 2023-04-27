@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1293,6 +1293,7 @@ MonoBehaviour:
   - {fileID: 6174410183395098683, guid: 6e0e8427eac35f04a8b2fdbb3225fa58, type: 3}
   - {fileID: 6196327573429336862, guid: 682be2be2ac3ae14cb7a9d389cf8005c, type: 3}
   currentOtomatPos: 0
+  maxCarringObjectsCount: 5
   currentPosNumberText: {fileID: 1816339705}
 --- !u!4 &555987872
 Transform:
@@ -2560,6 +2561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingBarImage: {fileID: 437900795}
+  boxPoint: {fileID: 1267859708}
 --- !u!65 &910975565
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2655,7 +2657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &973533052
 Light:
   m_ObjectHideFlags: 0

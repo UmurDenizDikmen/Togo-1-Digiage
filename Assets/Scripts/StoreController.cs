@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StoreController : MonoBehaviour
 {
     public Image loadingBarImage;
+    public Transform boxPoint;
     GameManager _gameManager;
     void Start()
     {
@@ -19,13 +21,15 @@ public class StoreController : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player"&& GameManager.instance.carringObjects.Count < 5 && GameManager.instance.state == GameState.InGame)
+        if (other.tag == "Player" && _gameManager.carringObjects.Count < _gameManager.maxCarringObjectsCount && _gameManager.state == GameState.InGame)
         {
-
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)
             {
-                _gameManager.carringObjects.Add(_gameManager.carriableObjects[Random.Range(0,_gameManager.carriableObjects.Count)]);
+                var currentObject = _gameManager.carriableObjects[Random.Range(0,_gameManager.carriableObjects.Count)];
+                _gameManager.carringObjects.Add(currentObject);
+                var instantiateObject = Instantiate(currentObject,transform.position,Quaternion.identity);
+                instantiateObject.transform.DOJump(boxPoint.position,1,1,1f).SetEase(Ease.Linear).OnComplete(()=>Destroy(instantiateObject));
                 loadingBarImage.fillAmount = 0;
             }
         }

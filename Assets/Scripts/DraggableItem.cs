@@ -69,7 +69,7 @@ public class DraggableItem : MonoBehaviour
                 gameManager.currentPosNumberText.text = string.Empty;
                 //gameManager.carringObjects.Remove(transform.gameObject);
                 gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count-1);
-                if(gameManager.carringObjects.Count == 0)
+                if(gameManager.carringObjects.Count == 0 || gameManager.otomatAvaliblePos.Count == 0)
                 {
                     gameManager.ChangeGameState(GameState.InGame);
                 }
