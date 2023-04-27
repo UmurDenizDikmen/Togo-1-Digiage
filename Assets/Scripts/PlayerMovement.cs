@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public FloatingJoystick floatingJoystick;
     public GameObject backGround;
-    public float speed;
+    private  float speed;
     public Animator playerAnim;
 
     private void Start()
@@ -36,11 +36,14 @@ public class PlayerMovement : MonoBehaviour
         switch (newState)
         {
             case GameState.Start:
-
+                 speed = 0;
                 break;
 
             case GameState.InGame:
-
+               speed = 5;
+                break;
+                case GameState.Vending :
+                speed = 0;
                 break;
         }
     }
