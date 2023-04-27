@@ -6,25 +6,20 @@ public class VendingMachineController : MonoBehaviour
 {
     bool isloading = false;
     public Image loadingBarImage;
-    void Start()
+
+    private void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+          GameManager.onStateChanged += OnStateChanged;
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player"&& GameManager.instance.carringObjects.Count > 0 && GameManager.instance.state == GameState.InGame)
         {
-            // StartCoroutine(LoadingBar(loadingBarImage,1f,Time.time));
+
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)
             {
-                //işlem yap
+                GameManager.instance.ChangeGameState(GameState.Vending);
             }
         }
     }
@@ -36,20 +31,12 @@ public class VendingMachineController : MonoBehaviour
         }
 
     }
-    /*private IEnumerator LoadingBar(Image loadingBar, float waitTime, float startTime)
+    private void OnStateChanged(GameState newState)
     {
-        isloading = true;
-        print(startTime);
-        print($"basladi: {Time.deltaTime}");
-        while (startTime + waitTime >= Time.time)
+        switch(newState)
         {
-            print($"baslama: {Time.deltaTime}");
-            loadingBar.fillAmount += 1f/1f*Time.deltaTime;
-            yield return null;
 
         }
-        loadingBar.fillAmount = 0f;
-        print($"bitti: {Time.deltaTime}");
-        isloading = false;
-    }*/
+    }
+
 }
