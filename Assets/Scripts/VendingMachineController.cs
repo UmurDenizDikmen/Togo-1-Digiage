@@ -5,39 +5,51 @@ using UnityEngine.UI;
 public class VendingMachineController : MonoBehaviour
 {
     bool isloading = false;
-    public Image loadingBarImage, loadingBarBackgroundImage;
+    public Image loadingBarImage;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    private void OnTriggerStay(Collider other) 
+    private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            StartCoroutine(LoadingBar(loadingBarImage,loadingBarBackgroundImage,1f,Time.time));
+            // StartCoroutine(LoadingBar(loadingBarImage,1f,Time.time));
+            loadingBarImage.fillAmount += .8f * Time.deltaTime;
+            if (loadingBarImage.fillAmount == 1)
+            {
+                //işlem yap
+            }
         }
     }
-    IEnumerator LoadingBar(Image loadingBar, Image loadingBarBackground, float waitTime, float startTime)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            loadingBarImage.fillAmount = 0;
+        }
+
+    }
+    /*private IEnumerator LoadingBar(Image loadingBar, float waitTime, float startTime)
     {
         isloading = true;
         print(startTime);
-        print($"basladi: {Time.deltaTime}");        
+        print($"basladi: {Time.deltaTime}");
         while (startTime + waitTime >= Time.time)
         {
             print($"baslama: {Time.deltaTime}");
-            loadingBarBackground.fillAmount -= 1f/1f*Time.deltaTime;
             loadingBar.fillAmount += 1f/1f*Time.deltaTime;
             yield return null;
+
         }
         loadingBar.fillAmount = 0f;
-        loadingBarBackground.fillAmount = 1f;
         print($"bitti: {Time.deltaTime}");
         isloading = false;
-    }
+    }*/
 }
