@@ -19,6 +19,7 @@ public class VendingMachineController : MonoBehaviour
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)
             {
+                //GameManager.instance.objectsBox.SetActive(true);
                 GameManager.instance.ChangeGameState(GameState.Vending);
             }
         }

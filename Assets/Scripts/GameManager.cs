@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int currentOtomatPos,
                 maxCarringObjectsCount = 5;
     public TextMeshProUGUI currentPosNumberText;
+    public GameObject objectsBox,player;
     public static GameManager instance;
     public GameState state { get; private set; }
 
@@ -58,10 +59,14 @@ public class GameManager : MonoBehaviour
             case GameState.InGame:
                 inGameCam.Priority = 11;
                 inVendingCam.Priority = 10;
+                objectsBox.SetActive(false);
+                player.SetActive(true);
                 break;
             case GameState.Vending:
                 inGameCam.Priority = 10;
                 inVendingCam.Priority = 11;
+                objectsBox.SetActive(true);
+                player.SetActive(false);
 
                 break;
         }
