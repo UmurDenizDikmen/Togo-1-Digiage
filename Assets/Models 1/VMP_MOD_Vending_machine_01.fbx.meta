@@ -3,7 +3,22 @@ guid: 0a76c1b0b390a5c44b3ac737b449914b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VMP_MAT_01
+    second: {fileID: 2100000, guid: bcb6032eb59a62f4fac27b45d65147d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VMP_MAT_02
+    second: {fileID: 2100000, guid: d4b14311658171842a67ff58d269a863, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VMP_MAT_Glass_01
+    second: {fileID: 2100000, guid: 66eaf45a517113b469b7dc943fed5e84, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
