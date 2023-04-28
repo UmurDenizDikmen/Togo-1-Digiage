@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)&& state == GameState.Start)
         {
-              ChangeGameState(GameState.InGame);
+            ChangeGameState(GameState.InGame);
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
