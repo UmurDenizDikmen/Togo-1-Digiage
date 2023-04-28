@@ -70,7 +70,7 @@ public class DraggableItem : MonoBehaviour
                 gameManager.currentPosNumberText.text = string.Empty;
                 // gameManager.carringObjects.Remove(transform.gameObject);
                 gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count - 1);
-                //VendingMachineController.Sell
+                hit.transform.parent.GetComponent<VendingMachineController>().SellableObjectAdd(transform.gameObject);//rafa eklenen nesne otomatin listesine ekler
                 if (gameManager.carringObjects.Count == 0 || gameManager.otomatAvaliblePos.Count == 0)
                 {
                     gameManager.ChangeGameState(GameState.InGame);

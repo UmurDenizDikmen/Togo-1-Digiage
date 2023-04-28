@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public class VendingMachineController : MonoBehaviour
 {
+    GameManager _gameManager;
     bool isloading = false;
     public Image loadingBarImage;
     public GameObject moneyPopup;
     public int sellableObjectCount = 0;
+    public List<GameObject> sellableObjects = new List<GameObject>();
 
     private void Start()
     {
-          GameManager.onStateChanged += OnStateChanged;
+        GameManager.onStateChanged += OnStateChanged;
+        _gameManager = GameManager.instance;
+        //InvokeRepeating("SellObject",1f,2f);
     }
     private void OnTriggerStay(Collider other)
     {
@@ -34,14 +38,21 @@ public class VendingMachineController : MonoBehaviour
         }
 
     }
-    public void SellableObjectCountUp()
+    public void SellableObjectAdd(GameObject obj)
     {
-        sellableObjectCount++;
+        //sellableObjectCount++;
+        Debug.Log("obje eklendi");
+        sellableObjects.Add(obj);
     }
-    public void SellableObjectCountDown()
+    public void SellObject()
     {
-        if(sellableObjectCount==0) return;
-        sellableObjectCount--;
+        Debug.Log("satis basladi");
+        if(sellableObjects.Count==0) return;
+        var lastobject =sellableObjects[0];
+        sellableObjects.RemoveAt(0);
+        Destroy(lastobject);
+        _gameManager.MoneyValue+=10;
+        Debug.Log("satis oldu");
     }
     private void OnStateChanged(GameState newState)
     {
