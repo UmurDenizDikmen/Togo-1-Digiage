@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
             carringObjects.Add(carriableObjects[0].gameObject);
         }
     }
+
     public void ChangeGameState(GameState newState)
     {
         switch (newState)

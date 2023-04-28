@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class VendingMachineController : MonoBehaviour
@@ -44,6 +45,8 @@ public class VendingMachineController : MonoBehaviour
         sellableObjects.RemoveAt(0);
         Destroy(lastobject);
         _gameManager.MoneyValue += 10;
+      //  _gameManager.otomatAvaliblePos.Add(int.Parse(lastobject.transform.parent.GetComponent<TextMeshPro>().text));
+       // _gameManager.removeNumbers.Remove(int.Parse(lastobject.transform.parent.GetComponent<TextMeshPro>().text));
 
     }
     private void OnTriggerExit(Collider other)

@@ -92,9 +92,8 @@ public class DraggableItem : MonoBehaviour
             transform.SetParent(parent);
             transform.GetComponent<Collider>().enabled = true;
         }
-
-
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
