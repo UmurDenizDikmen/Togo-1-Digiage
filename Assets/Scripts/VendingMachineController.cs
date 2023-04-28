@@ -6,6 +6,8 @@ public class VendingMachineController : MonoBehaviour
 {
     bool isloading = false;
     public Image loadingBarImage;
+    public GameObject moneyPopup;
+    public int sellableObjectCount = 0;
 
     private void Start()
     {
@@ -31,6 +33,15 @@ public class VendingMachineController : MonoBehaviour
             loadingBarImage.fillAmount = 0;
         }
 
+    }
+    public void SellableObjectCountUp()
+    {
+        sellableObjectCount++;
+    }
+    public void SellableObjectCountDown()
+    {
+        if(sellableObjectCount==0) return;
+        sellableObjectCount--;
     }
     private void OnStateChanged(GameState newState)
     {
