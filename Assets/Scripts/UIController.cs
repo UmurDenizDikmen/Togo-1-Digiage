@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField]private GameObject numberPanels;
-    [SerializeField]private TextMeshProUGUI textMoneyValue;
+    [SerializeField] private GameObject numberPanels;
+    [SerializeField] private GameObject moneyPanels;
+    [SerializeField] private TextMeshProUGUI textMoneyValue;
 
     private void Start()
     {
@@ -20,17 +21,20 @@ public class UIController : MonoBehaviour
     }
     private void OnStatChanged(GameState state)
     {
-        switch(state)
+        switch (state)
         {
             case GameState.Start:
-            numberPanels.SetActive(false);
-            break;
+                numberPanels.SetActive(false);
+                moneyPanels.SetActive(true);
+                break;
             case GameState.InGame:
-            numberPanels.SetActive(false);
-            break;
+                numberPanels.SetActive(false);
+                moneyPanels.SetActive(true);
+                break;
             case GameState.Vending:
-            numberPanels.SetActive(true);
-            break;
+                numberPanels.SetActive(true);
+                moneyPanels.SetActive(true);
+                break;
         }
     }
 }
