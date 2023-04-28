@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6196327573429336858}
   - component: {fileID: 6196327573429336857}
   - component: {fileID: 6196327573429336856}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cola
   m_TagString: Untagged
   m_Icon: {fileID: 0}

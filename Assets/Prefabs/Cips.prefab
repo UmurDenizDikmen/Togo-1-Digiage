@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6174410183395098687}
   - component: {fileID: 6174410183395098684}
   - component: {fileID: 6174410183395098685}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cips
   m_TagString: Untagged
   m_Icon: {fileID: 0}

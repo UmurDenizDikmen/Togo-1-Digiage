@@ -6,7 +6,7 @@ using UnityEngine;
 public class BoxController : MonoBehaviour
 {
     GameManager _gameManager;
-    private int maxCapacity = 3;
+    public static int maxCapacity = 5;
     private  GameObject objects;
     public static bool isSelected = false;
     private void Start()
@@ -17,7 +17,7 @@ public class BoxController : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        //if(_gameManager.carringObjects.Count < 1) return;
+        if(_gameManager.carringObjects.Count < 1) return;
         int randomObjects = Random.Range(0,_gameManager.carringObjects.Count - 1);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

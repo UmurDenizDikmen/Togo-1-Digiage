@@ -21,7 +21,7 @@ public class StoreController : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && _gameManager.carringObjects.Count < _gameManager.maxCarringObjectsCount && _gameManager.state == GameState.InGame)
+        if (other.tag == "Player" && _gameManager.carringObjects.Count < BoxController.maxCapacity && _gameManager.state == GameState.InGame)
         {
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)

@@ -26,60 +26,74 @@ public class DraggableItem : MonoBehaviour
     }
     private void Start()
     {
-        initPos = transform.position;
+        initPos = transform.localPosition;
         gameManager = GameManager.instance;
     }
     public typeOfItem itemType;
     private void OnMouseDown()
     {
         gameManager.RandomOtomatPos();
-        offset = transform.position - MouseWorldPosition();
+        offset = transform.localPosition - MouseWorldPosition();
         transform.GetComponent<Collider>().enabled = false;
-        initPos = transform.position;
+        initPos = transform.localPosition;
         parent = transform.parent;
 
     }
     private void OnMouseDrag()
     {
         Vector3 currentPos = MouseWorldPosition() + offset;
-        float ypos = currentPos.y;
-        currentPos.y = Mathf.Clamp(ypos,4f,10f);
-        transform.position = new Vector3(-5.5f,  currentPos.y , currentPos.z);
+        // float ypos = currentPos.y;
+        // currentPos.y = Mathf.Clamp(ypos,3f,1.2f);
+        transform.localPosition = new Vector3(currentPos.x, currentPos.y, 1.4f);
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
 
     }
     private void OnMouseUp()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, .7f);
-        foreach (var hit in hitColliders)
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, .7f, 1 << 7);
+        foreach (Collider hit in hitColliders)
         {
+            var hitNumber = hit.transform.GetChild(0).GetComponent<TextMeshPro>().text;
+            var numberOfItem = int.Parse(hitNumber);
 
-            var hitNumber = int.Parse(hit.transform.GetChild(0).GetComponent<TextMeshPro>().text);
-            if (hitNumber == gameManager.currentOtomatPos)
+
+            if (numberOfItem == gameManager.currentOtomatPos && hitNumber != null)
             {
+
+
+
 
                 BoxController.isSelected = false;
                 var transformRaf = hit.transform.GetChild(1);
                 transform.SetParent(transformRaf);
                 transform.position = transformRaf.position;
                 isInPlace = true;
-                gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık  //burda kmerata hareketini kontrol edicez.
+                gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık
                 gameManager.removeNumbers.Add(gameManager.currentOtomatPos); // diğer lsiteye ekledik.
                 gameManager.currentPosNumberText.text = string.Empty;
-                //gameManager.carringObjects.Remove(transform.gameObject);
-                gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count-1);
-                if(gameManager.carringObjects.Count == 0 || gameManager.otomatAvaliblePos.Count == 0)
+                // gameManager.carringObjects.Remove(transform.gameObject);
+                gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count - 1);
+                if (gameManager.carringObjects.Count == 0 || gameManager.otomatAvaliblePos.Count == 0)
                 {
                     gameManager.ChangeGameState(GameState.InGame);
                 }
 
 
             }
+            if (hit == null)
+            {
+                transform.localPosition = initPos;
+                transform.SetParent(parent);
+                transform.GetComponent<Collider>().enabled = true;
+            }
+
+
+
         }
         if (isInPlace == false)
         {
-            transform.position = initPos;
+            transform.localPosition = initPos;
             transform.SetParent(parent);
             transform.GetComponent<Collider>().enabled = true;
         }
@@ -88,8 +102,8 @@ public class DraggableItem : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-          Gizmos.color = Color.red;
-          Gizmos.DrawWireSphere(transform.position,.7f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, .7f);
     }
     private Vector3 MouseWorldPosition()
     {

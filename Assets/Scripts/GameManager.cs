@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera inVendingCam;
     public List<GameObject> carringObjects = new List<GameObject>();
     public List<GameObject> carriableObjects = new List<GameObject>();
-    public int currentOtomatPos,
-                maxCarringObjectsCount = 5;
+    public int currentOtomatPos;
     public TextMeshProUGUI currentPosNumberText;
     public GameObject objectsBox,player;
     public static GameManager instance;
