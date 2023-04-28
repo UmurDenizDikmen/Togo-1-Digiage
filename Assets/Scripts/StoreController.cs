@@ -7,7 +7,7 @@ using DG.Tweening;
 public class StoreController : MonoBehaviour
 {
     public Image loadingBarImage;
-    public Transform boxPoint;
+    public Transform boxPoint,storePoint;
     GameManager _gameManager;
     void Start()
     {
@@ -28,7 +28,7 @@ public class StoreController : MonoBehaviour
             {
                 var currentObject = _gameManager.carriableObjects[Random.Range(0,_gameManager.carriableObjects.Count)];
                 _gameManager.carringObjects.Add(currentObject);
-                var instantiateObject = Instantiate(currentObject,transform.position,Quaternion.identity);
+                var instantiateObject = Instantiate(currentObject,storePoint.position,Quaternion.identity);
                 instantiateObject.transform.DOJump(boxPoint.position,1,1,1f).SetEase(Ease.Linear).OnComplete(()=>Destroy(instantiateObject));
                 loadingBarImage.fillAmount = 0;
             }

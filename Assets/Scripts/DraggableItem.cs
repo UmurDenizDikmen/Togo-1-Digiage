@@ -44,14 +44,14 @@ public class DraggableItem : MonoBehaviour
         Vector3 currentPos = MouseWorldPosition() + offset;
         // float ypos = currentPos.y;
         // currentPos.y = Mathf.Clamp(ypos,3f,1.2f);
-        transform.localPosition = new Vector3(currentPos.x, currentPos.y, 1.4f);
+        transform.localPosition = new Vector3(currentPos.x, currentPos.y, 1.2f);
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
 
     }
     private void OnMouseUp()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, .7f, 1 << 7);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, .2f, 1 << 7);
         foreach (Collider hit in hitColliders)
         {
             var hitNumber = hit.transform.GetChild(0).GetComponent<TextMeshPro>().text;
@@ -60,10 +60,6 @@ public class DraggableItem : MonoBehaviour
 
             if (numberOfItem == gameManager.currentOtomatPos && hitNumber != null)
             {
-
-
-
-
                 BoxController.isSelected = false;
                 var transformRaf = hit.transform.GetChild(1);
                 transform.SetParent(transformRaf);
@@ -78,8 +74,6 @@ public class DraggableItem : MonoBehaviour
                 {
                     gameManager.ChangeGameState(GameState.InGame);
                 }
-
-
             }
             if (hit == null)
             {
@@ -103,7 +97,7 @@ public class DraggableItem : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, .7f);
+        Gizmos.DrawWireSphere(transform.position, .2f);
     }
     private Vector3 MouseWorldPosition()
     {
