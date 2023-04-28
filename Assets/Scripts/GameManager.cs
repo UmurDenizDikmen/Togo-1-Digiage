@@ -9,6 +9,8 @@ using Cinemachine;
 public class GameManager : MonoBehaviour
 {
     public static event Action<GameState> onStateChanged;
+    public static event Action onMoneyChange;
+    private int money = 50;
     public List<int> otomatAvaliblePos = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public List<int> removeNumbers = new List<int>(); //bunu yapay zaeka oldugu zaman otomat lsitesine tekrar eklicez.
     [SerializeField] private CinemachineVirtualCamera inGameCam;
@@ -25,6 +27,15 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+    }
+    public int MoneyValue
+    {
+        get { return money; }
+        set
+        {
+            money = value;
+            onMoneyChange?.Invoke();
+        }
     }
     private void Start()
     {
