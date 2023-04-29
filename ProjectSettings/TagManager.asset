@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shell1
+  - Money
+  - MoneyArea
   layers:
   - Default
   - TransparentFX

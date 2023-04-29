@@ -17,8 +17,9 @@ public class VendingMachineController : MonoBehaviour
     [SerializeField] private GameObject _boxControl;
     public List<int> otomatAvaliblePos = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public List<int> removeNumbers = new List<int>();
-
+    [SerializeField] private List<GameObject> moneys = new List<GameObject>();
     [SerializeField] private CinemachineVirtualCamera inVendingCam;
+    int sellCount = 0;
     private void Awake()
     {
         instance = this;
@@ -27,7 +28,6 @@ public class VendingMachineController : MonoBehaviour
     {
         GameManager.onStateChanged += OnStateChanged;
         _gameManager = GameManager.instance;
-
     }
     public void RandomOtomatPos()
     {
@@ -35,11 +35,22 @@ public class VendingMachineController : MonoBehaviour
         currentOtomatPos = otomatAvaliblePos[value];
         currentPosNumberText.text = currentOtomatPos.ToString();
     }
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.tag == "Player")
+        {
+            _gameManager.MoneyValue += sellCount * 10;
+            sellCount = 0;
+            foreach (var money in moneys)
+            {
+                money.SetActive(false);
+            }
+        }   
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player" && GameManager.instance.carringObjects.Count > 0 && GameManager.instance.state == GameState.InGame)
         {
-
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)
             {
@@ -47,7 +58,6 @@ public class VendingMachineController : MonoBehaviour
                 _boxControl.SetActive(true);
                 GameManager.instance.ChangeGameState(GameState.Vending);
                 GameManager.instance.currentVending = transform.gameObject;
-
             }
         }
     }
@@ -60,11 +70,12 @@ public class VendingMachineController : MonoBehaviour
         if (sellableObjects.Count == 0) return;
         var lastobject = sellableObjects[0];
         sellableObjects.RemoveAt(0);
-        _gameManager.MoneyValue += 10;
+        moneys[sellCount].SetActive(true);
+        sellCount++;
+        //_gameManager.MoneyValue += 10;
         otomatAvaliblePos.Add(int.Parse(lastobject.transform.parent.transform.parent.transform.GetChild(0).GetComponent<TextMeshPro>().text));
         removeNumbers.Remove(int.Parse(lastobject.transform.parent.transform.parent.transform.GetChild(0).GetComponent<TextMeshPro>().text));
         Destroy(lastobject);
-
     }
     private void OnTriggerExit(Collider other)
     {
@@ -72,7 +83,6 @@ public class VendingMachineController : MonoBehaviour
         {
             loadingBarImage.fillAmount = 0;
         }
-
     }
     private void OnStateChanged(GameState newState)
     {

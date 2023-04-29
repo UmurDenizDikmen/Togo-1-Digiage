@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     {
         GameManager.onStateChanged += OnStatChanged;
         GameManager.onMoneyChange += OnMoneyChanged;
+        textMoneyValue.text = GameManager.instance.MoneyValue.ToString();
 
     }
     private void OnMoneyChanged()
@@ -33,7 +34,7 @@ public class UIController : MonoBehaviour
                 break;
             case GameState.Vending:
                 numberPanels.SetActive(true);
-                moneyPanels.SetActive(true);
+                moneyPanels.SetActive(false);
                 break;
         }
     }
