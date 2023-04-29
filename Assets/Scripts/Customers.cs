@@ -21,7 +21,7 @@ public class Customers : MonoBehaviour
     }
     private void Update()
     {
-        if (GameManager.instance.state == GameState.InGame && GameManager.instance.currentVending.GetComponent<VendingMachineController>().sellableObjects.Count > 0 && !isReturn)
+        if (GameManager.instance.state == GameState.InGame && vendingMachine.GetComponent <VendingMachineController>().sellableObjects.Count > 0 && !isReturn)
         {
             anim.SetBool("isWalk", true);
             if (isSelling == false)
@@ -34,7 +34,8 @@ public class Customers : MonoBehaviour
 
                 anim.SetBool("isWalk", false);
                 isSelling = true;
-                VendingMachineController.instance.SellObject();
+                ///VendingMachineController.instance.SellObject();
+                vendingMachine.GetComponent<VendingMachineController>().SellObject();
                 anim.SetBool("isWalk", true);
                 agent.SetDestination(initPos);
                 isReturn = true;
