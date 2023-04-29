@@ -17,13 +17,14 @@ public class Customers : MonoBehaviour
     private void Start()
     {
         initPos = transform.position;
+
     }
     private void Update()
     {
         if (GameManager.instance.state == GameState.InGame && VendingMachineController.instance.sellableObjects.Count > 0 && !isReturn)
         {
             anim.SetBool("isWalk", true);
-            if(isSelling == false)
+            if (isSelling == false)
             {
                 agent.SetDestination(vendingLocation.position);
             }
@@ -40,7 +41,7 @@ public class Customers : MonoBehaviour
             }
 
         }
-        else if (Vector3.Distance(transform.position, initPos) < .5f&&isReturn)
+        else if (Vector3.Distance(transform.position, initPos) < .5f && isReturn)
         {
             anim.SetBool("isWalk", false);
             anim.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -48,6 +49,20 @@ public class Customers : MonoBehaviour
             isReturn = false;
 
         }
+        else if (GameManager.instance.state == GameState.Vending)
+        {
+            anim.SetBool("isWalk", true);
+            agent.SetDestination(initPos);
+            if(Vector3.Distance(transform.position, initPos) < .5f)
+            {
+                anim.SetBool("isWalk", false);
+               anim.transform.rotation = Quaternion.Euler(0, 180, 0);
+                isReturn = true;
+            }
+
+        }
+
 
     }
+
 }

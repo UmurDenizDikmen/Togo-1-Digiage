@@ -28,7 +28,6 @@ public class VendingMachineController : MonoBehaviour
             loadingBarImage.fillAmount += .8f * Time.deltaTime;
             if (loadingBarImage.fillAmount == 1)
             {
-                //GameManager.instance.objectsBox.SetActive(true);
                 GameManager.instance.ChangeGameState(GameState.Vending);
             }
         }
@@ -43,10 +42,10 @@ public class VendingMachineController : MonoBehaviour
         if (sellableObjects.Count == 0) return;
         var lastobject = sellableObjects[0];
         sellableObjects.RemoveAt(0);
+         _gameManager.MoneyValue += 10;
+        _gameManager.otomatAvaliblePos.Add(int.Parse(lastobject.transform.parent.transform.parent.transform.GetChild(0).GetComponent<TextMeshPro>().text));
+        _gameManager.removeNumbers.Remove(int.Parse(lastobject.transform.parent.transform.parent.transform.GetChild(0).GetComponent<TextMeshPro>().text));
         Destroy(lastobject);
-        _gameManager.MoneyValue += 10;
-      //  _gameManager.otomatAvaliblePos.Add(int.Parse(lastobject.transform.parent.GetComponent<TextMeshPro>().text));
-       // _gameManager.removeNumbers.Remove(int.Parse(lastobject.transform.parent.GetComponent<TextMeshPro>().text));
 
     }
     private void OnTriggerExit(Collider other)

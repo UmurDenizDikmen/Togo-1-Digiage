@@ -39,7 +39,7 @@ public class BoxController : MonoBehaviour
             }
 
             objects.transform.SetParent(transform);
-            objects.transform.DOScale(new Vector3(0.2f, 0.2f, 0.2f), 0.01f);
+            objects.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.01f);
             //_gameManager.carringObjects.Remove(objects);
 
         }
