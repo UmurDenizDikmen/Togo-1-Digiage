@@ -13,12 +13,6 @@ public class StoreController : MonoBehaviour
     {
         _gameManager = GameManager.instance;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player" && _gameManager.carringObjects.Count < BoxController.maxCapacity && _gameManager.state == GameState.InGame)

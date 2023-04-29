@@ -17,6 +17,7 @@ public class DraggableItem : MonoBehaviour
     private Transform parent;
     private Vector3 initPos;
     private bool isInPlace = false;
+    private VendingMachineController vendingController;
 
     public enum typeOfItem
     {
@@ -32,7 +33,8 @@ public class DraggableItem : MonoBehaviour
     public typeOfItem itemType;
     private void OnMouseDown()
     {
-        gameManager.RandomOtomatPos();
+        vendingController = GameManager.instance.currentVending.GetComponent<VendingMachineController>();
+        vendingController.RandomOtomatPos();
         offset = transform.localPosition - MouseWorldPosition();
         transform.GetComponent<Collider>().enabled = false;
         initPos = transform.localPosition;
@@ -55,23 +57,25 @@ public class DraggableItem : MonoBehaviour
         foreach (Collider hit in hitColliders)
         {
             var hitNumber = hit.transform.GetChild(0).GetComponent<TextMeshPro>().text;
+            var mainParent = hit.transform.root;
+           // vendingController = mainParent.GetComponent<VendingMachineController>();
             var numberOfItem = int.Parse(hitNumber);
 
 
-            if (numberOfItem == gameManager.currentOtomatPos && hitNumber != null)
+            if (numberOfItem == vendingController.currentOtomatPos && hitNumber != null)
             {
                 BoxController.isSelected = false;
                 var transformRaf = hit.transform.GetChild(1);
                 transform.SetParent(transformRaf);
                 transform.position = transformRaf.position;
                 isInPlace = true;
-                gameManager.otomatAvaliblePos.Remove(gameManager.currentOtomatPos); //burda ana listeden çıkardık
-                gameManager.removeNumbers.Add(gameManager.currentOtomatPos); // diğer lsiteye ekledik.
-                gameManager.currentPosNumberText.text = string.Empty;
+                vendingController.otomatAvaliblePos.Remove(vendingController.currentOtomatPos); //burda ana listeden çıkardık
+                vendingController.removeNumbers.Add(vendingController.currentOtomatPos); // diğer lsiteye ekledik.
+                vendingController.currentPosNumberText.text = string.Empty;
                 // gameManager.carringObjects.Remove(transform.gameObject);
                 gameManager.carringObjects.RemoveAt(gameManager.carringObjects.Count - 1);
                 hit.transform.parent.GetComponent<VendingMachineController>().SellableObjectAdd(transform.gameObject);
-                if (gameManager.carringObjects.Count == 0 || gameManager.otomatAvaliblePos.Count == 0)
+                if (gameManager.carringObjects.Count == 0 || vendingController.otomatAvaliblePos.Count == 0)
                 {
                     gameManager.ChangeGameState(GameState.InGame);
                 }
