@@ -46,6 +46,7 @@ public class DraggableItem : MonoBehaviour
         Vector3 currentPos = MouseWorldPosition() + offset;
         // float ypos = currentPos.y;
         // currentPos.y = Mathf.Clamp(ypos,3f,1.2f);
+
         transform.localPosition = new Vector3(currentPos.x, currentPos.y, 1.2f);
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
